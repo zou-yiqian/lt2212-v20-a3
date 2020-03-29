@@ -1,7 +1,4 @@
-import os
-import sys
 import argparse
-import numpy as np
 import pandas as pd
 from glob import glob
 import re
@@ -61,16 +58,16 @@ if __name__ == "__main__":
 
     y_train = pd.DataFrame(y_train)
     y_train['train_test'] = 'train'
+    y_train.columns = ['author', 'train_test']
     y_test = pd.DataFrame(y_test)
     y_test['train_test'] = 'test'
+    y_test.columns = ['author', 'train_test']
     X_train = pd.DataFrame(X_train)
     X_test = pd.DataFrame(X_test)
-
+    
     table_y = pd.concat([y_train, y_test])
     table_x = pd.concat([X_train, X_test])
     table = pd.concat([table_y, table_x], axis=1)
-    table.columns = ['author', 'train_test', 'y', 'x']
-    print(table)
     print("Writing to {}...".format(args.outputfile))
     # Write the table out here.
     table.to_csv(args.outputfile)
