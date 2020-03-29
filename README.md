@@ -39,6 +39,10 @@ Two more arguments in part 3.
 Example run: python a3_model.py a3.csv --hidden 20 --activation 'relu' --epoch 50 --batch 20
 #### result: hidden layer = 20
 There is some problem choosing activation and function forward.
+    x = self.nonlinear(x)
+TypeError: __init__() takes 1 positional argument but 2 were given
+
+have no idea how to solve it.
 ## Part Bonus - plotting
 bonus.py is used to plotting the precision-recall curve.
 The hidden layer sizes are 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
