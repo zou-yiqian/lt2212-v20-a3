@@ -19,30 +19,28 @@ class Net(nn.Module):
 
     def __init__(self, input_size, hidden_size, activation):
         super(Net, self).__init__()
-        self.input_size = input_size
-        self.hidden_size = hidden_size
         self.activation = activation
-        
-        if self.activation:
-            self.nonlinear = activation[self.activation]
-        
-        if self.hidden_size >0:
-            self.fc1 = nn.Linear(self.input_size, self.hidden_size)
-            self.fc2 = nn.Linear(self.hidden_size, 1)
+        if activation:
+            self.nonlinear = activation()
+            
+        if hidden_size > 0:
+            self.fc1 = nn.Linear(input_size, hidden_size)
+            self.fc2 = nn.Linear(hidden_size, 1)
         else:
-            self.fc1 = nn.Linear(self.input_size, 1)
-        self.sigmoid = nn.Sigmoid()
+            self.fc1 = nn.Linear(input_size, 1)
 
+        self.sigmoid = nn.Sigmoid()
+        
     def forward(self, x):
         x = self.fc1(x)
-        if activation:
+        if self.activation:
             x = self.nonlinear(x)
         if hidden_size != 0:
             x = self.fc2(x)
         x = self.sigmoid(x)
         return x
 
-
+    
 def sample_data(batch_size, df):
     choices = []
     sample= []
